@@ -4,10 +4,21 @@ import { Button } from './components/Button'
 import { Clear } from './components/Clear'
 import { Input } from './components/Input'
 import * as math from 'mathjs'
+import axios from 'axios'
 
 class App extends Component {
   state = {
-    input: ""
+    input: "",
+    previous: ""
+  }
+
+  componentDidMount() {
+    this.loadValues()
+  }
+
+  loadValues = () => {
+    axios.get("/total").then(res => this.setState({ input: res.data }))
+    axios.get("/previous").then(res => this.setState({ previous: res.data }))
   }
 
   handleClick = (val) => {
@@ -15,18 +26,19 @@ class App extends Component {
   }
 
   handleClear = () => {
-    this.setState({ input: "" })
+    this.setState({ input: "", previous: "" })
   }
 
   handleEqual = () => {
     this.setState({ input: math.evaluate(this.state.input) })
+    axios.post("/newtotal", { "newTotal": this.state.input })
   }
 
   render() {
     return (
       <div className="App">
         <div className = "calc">
-          <Input input = {this.state.input} />
+          <Input input = {this.state.input} previous = {this.state.previous} />
           <div className = "row">
             <Button handleClick = {this.handleClick}>7</Button>
             <Button handleClick = {this.handleClick}>8</Button>

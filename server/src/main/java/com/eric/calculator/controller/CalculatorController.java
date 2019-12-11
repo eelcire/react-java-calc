@@ -12,23 +12,23 @@ import java.util.ArrayList;
 public class CalculatorController {
 
     @Autowired
-    Total total;
+	com.eric.calculator.Total total;
 		
 	@GetMapping("/total")
-	public ResponseEntity<Double> getTotal() {		
-		ResponseEntity<Double> response =  ResponseEntity.ok(total.getTotal());
+	public ResponseEntity<String> getTotal() {
+		ResponseEntity<String> response =  ResponseEntity.ok(total.getTotal());
 		return response;	
 	}
 	
 	@GetMapping("/previous")
-	public ResponseEntity<Double> getPrevious() {		
-		ResponseEntity<Double> response =  ResponseEntity.ok(total.getPrevious());
+	public ResponseEntity<String> getPrevious() {
+		ResponseEntity<String> response =  ResponseEntity.ok(total.getPrevious());
 		return response;	
 	}
 	@PostMapping("/newtotal")
-	public ResponseEntity<Double> setTotal(@RequestParam(name = "newTotal") Double newTotal){	
+	public ResponseEntity<String> setTotal(@RequestParam(name = "newTotal") String newTotal){
 		total.setTotal(newTotal);
-		ResponseEntity<Double> response =  ResponseEntity.ok(total.getTotal());
+		ResponseEntity<String> response =  ResponseEntity.ok(total.getTotal());
 		return response;	
 	}
 }

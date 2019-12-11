@@ -4,24 +4,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Total {
-    private double total;
-    private double previous;
+    private String total;
+    private String previous;
 
     public Total() {
-        this.total = 0;
-        this.previous = 0;
+        this.total = "0";
+        this.previous = "0";
     }
 
-    public double getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(double newTotal) {
+    public void setTotal(String newTotal) {
         this.previous = this.total;
         this.total = newTotal;
     }
 
-    public double getPrevious() {
+    public String getPrevious() {
         return previous;
     }
 }
