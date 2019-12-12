@@ -1,4 +1,4 @@
-package com.eric.calculator;
+package com.eric.calculator.controller;
 
 import org.springframework.stereotype.Component;
 

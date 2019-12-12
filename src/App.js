@@ -8,8 +8,8 @@ import axios from 'axios'
 
 class App extends Component {
   state = {
-    input: "",
-    previous: ""
+    input: "0",
+    previous: "0"
   }
 
   componentDidMount() {
@@ -26,12 +26,15 @@ class App extends Component {
   }
 
   handleClear = () => {
-    this.setState({ input: "", previous: "" })
+    axios.post(`/newtotal?newTotal="0"`)
+    axios.post(`/newtotal?newTotal="0"`)
+    this.loadValues()
   }
 
-  handleEqual = () => {
-    this.setState({ input: math.evaluate(this.state.input) })
-    axios.post("/newtotal", { "newTotal": this.state.input })
+  handleEqual = async () => {
+    let answer = await math.evaluate(this.state.input)
+    this.setState({ input: answer })
+    axios.post(`/newtotal?newTotal=${this.state.input}`).then(this.loadValues())
   }
 
   render() {
